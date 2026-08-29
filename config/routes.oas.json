@@ -10,9 +10,12 @@
       "post": {
         "operationId": "joyResponses",
         "summary": "Joy responses (proxied)",
-        "responses": { "200": { "description": "Streamed Responses API events" } },
+        "responses": {
+          "200": {
+            "description": "Streamed Responses API events"
+          }
+        },
         "x-zuplo-route": {
-          "corsPolicy": "anything-goes",
           "handler": {
             "export": "urlRewriteHandler",
             "module": "$import(@zuplo/runtime)",
@@ -21,7 +24,9 @@
               "forwardSearch": true
             }
           },
-          "policies": { "inbound": [] }
+          "policies": {
+            "inbound": []
+          }
         }
       }
     },
@@ -29,15 +34,22 @@
       "get": {
         "operationId": "joyModels",
         "summary": "List models (proxied)",
-        "responses": { "200": { "description": "Model list" } },
+        "responses": {
+          "200": {
+            "description": "Model list"
+          }
+        },
         "x-zuplo-route": {
-          "corsPolicy": "anything-goes",
           "handler": {
             "export": "urlRewriteHandler",
             "module": "$import(@zuplo/runtime)",
-            "options": { "rewritePattern": "https://superjoy-joy-gateway.fly.dev/v1/models" }
+            "options": {
+              "rewritePattern": "https://superjoy-joy-gateway.fly.dev/v1/models"
+            }
           },
-          "policies": { "inbound": [] }
+          "policies": {
+            "inbound": []
+          }
         }
       }
     },
@@ -45,14 +57,22 @@
       "get": {
         "operationId": "health",
         "summary": "Health (proxied)",
-        "responses": { "200": { "description": "OK" } },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
         "x-zuplo-route": {
           "handler": {
             "export": "urlRewriteHandler",
             "module": "$import(@zuplo/runtime)",
-            "options": { "rewritePattern": "https://superjoy-joy-gateway.fly.dev/health" }
+            "options": {
+              "rewritePattern": "https://superjoy-joy-gateway.fly.dev/health"
+            }
           },
-          "policies": { "inbound": [] }
+          "policies": {
+            "inbound": []
+          }
         }
       }
     }
