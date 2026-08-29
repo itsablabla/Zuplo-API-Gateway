@@ -1,0 +1,12 @@
+{
+  "name": "superjoy-zuplo-api-gateway",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@zuplo/runtime": "latest"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}

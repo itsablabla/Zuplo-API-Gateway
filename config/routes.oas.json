@@ -1,0 +1,54 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Superjoy API Gateway",
+    "version": "1.0.0",
+    "description": "Fronts the Superjoy Joy gateway (OpenAI Responses API backed by DeepSeek). All fleet LLM traffic flows through here for auth, rate limiting, and observability."
+  },
+  "paths": {
+    "/v1/responses": {
+      "post": {
+        "summary": "Joy responses (streaming, proxied to the Joy gateway)",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlRewriteHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": {
+              "rewritePattern": "https://superjoy-joy-gateway.fly.dev/v1/responses",
+              "forwardSearch": true
+            }
+          },
+          "policies": { "inbound": [] }
+        }
+      }
+    },
+    "/v1/models": {
+      "get": {
+        "summary": "List models (proxied)",
+        "x-zuplo-route": {
+          "corsPolicy": "anything-goes",
+          "handler": {
+            "export": "urlRewriteHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": { "rewritePattern": "https://superjoy-joy-gateway.fly.dev/v1/models" }
+          },
+          "policies": { "inbound": [] }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health (proxied)",
+        "x-zuplo-route": {
+          "handler": {
+            "export": "urlRewriteHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": { "rewritePattern": "https://superjoy-joy-gateway.fly.dev/health" }
+          },
+          "policies": { "inbound": [] }
+        }
+      }
+    }
+  }
+}
