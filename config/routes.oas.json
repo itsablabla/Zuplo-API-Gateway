@@ -26,7 +26,8 @@
           },
           "policies": {
             "inbound": [
-              "api-key-inbound"
+              "api-key-inbound",
+              "forward-consumer"
             ]
           }
         }
@@ -51,7 +52,8 @@
           },
           "policies": {
             "inbound": [
-              "api-key-inbound"
+              "api-key-inbound",
+              "forward-consumer"
             ]
           }
         }

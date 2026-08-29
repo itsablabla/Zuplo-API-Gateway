@@ -10,6 +10,14 @@
           "allowUnauthenticatedRequests": false
         }
       }
+    },
+    {
+      "name": "forward-consumer",
+      "policyType": "custom-code-inbound",
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/forward-consumer)"
+      }
     }
   ]
 }
