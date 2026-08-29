@@ -3,12 +3,14 @@
   "info": {
     "title": "Superjoy API Gateway",
     "version": "1.0.0",
-    "description": "Fronts the Superjoy Joy gateway (OpenAI Responses API backed by DeepSeek). All fleet LLM traffic flows through here for auth, rate limiting, and observability."
+    "description": "Fronts the Joy gateway (OpenAI Responses API backed by DeepSeek)."
   },
   "paths": {
     "/v1/responses": {
       "post": {
-        "summary": "Joy responses (streaming, proxied to the Joy gateway)",
+        "operationId": "joyResponses",
+        "summary": "Joy responses (proxied)",
+        "responses": { "200": { "description": "Streamed Responses API events" } },
         "x-zuplo-route": {
           "corsPolicy": "anything-goes",
           "handler": {
@@ -25,7 +27,9 @@
     },
     "/v1/models": {
       "get": {
+        "operationId": "joyModels",
         "summary": "List models (proxied)",
+        "responses": { "200": { "description": "Model list" } },
         "x-zuplo-route": {
           "corsPolicy": "anything-goes",
           "handler": {
@@ -39,7 +43,9 @@
     },
     "/health": {
       "get": {
+        "operationId": "health",
         "summary": "Health (proxied)",
+        "responses": { "200": { "description": "OK" } },
         "x-zuplo-route": {
           "handler": {
             "export": "urlRewriteHandler",
