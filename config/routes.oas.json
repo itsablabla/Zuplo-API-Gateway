@@ -25,7 +25,9 @@
             }
           },
           "policies": {
-            "inbound": []
+            "inbound": [
+              "api-key-inbound"
+            ]
           }
         }
       }
@@ -48,7 +50,9 @@
             }
           },
           "policies": {
-            "inbound": []
+            "inbound": [
+              "api-key-inbound"
+            ]
           }
         }
       }
@@ -71,7 +75,9 @@
             }
           },
           "policies": {
-            "inbound": []
+            "inbound": [
+              "api-key-inbound"
+            ]
           }
         }
       }
