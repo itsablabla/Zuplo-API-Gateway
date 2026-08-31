@@ -13,6 +13,9 @@
         "responses": {
           "200": {
             "description": "Streamed Responses API events"
+          },
+          "429": {
+            "description": "Per-customer model rate limit exceeded"
           }
         },
         "x-zuplo-route": {
@@ -20,17 +23,23 @@
             "export": "urlRewriteHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "rewritePattern": "https://superjoy-joy-gateway.fly.dev/v1/responses",
+              "rewritePattern": "https://superjoy-model-gateway.fly.dev/v1/responses",
               "forwardSearch": true
             }
           },
           "policies": {
             "inbound": [
               "api-key-inbound",
+              "customer-model-rate-limit",
               "forward-consumer"
             ]
-          }
-        }
+          },
+          "label": "Joy responses"
+        },
+        "description": "Authenticate a customer machine and proxy one OpenAI-compatible Joy response through the protected model gateway.",
+        "tags": [
+          "Joy"
+        ]
       }
     },
     "/v1/models": {
@@ -47,7 +56,7 @@
             "export": "urlRewriteHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "rewritePattern": "https://superjoy-joy-gateway.fly.dev/v1/models"
+              "rewritePattern": "https://superjoy-model-gateway.fly.dev/v1/models"
             }
           },
           "policies": {
@@ -55,8 +64,13 @@
               "api-key-inbound",
               "forward-consumer"
             ]
-          }
-        }
+          },
+          "label": "Joy models"
+        },
+        "description": "Return the model identifiers available to an authenticated customer machine.",
+        "tags": [
+          "Joy"
+        ]
       }
     },
     "/health": {
@@ -73,15 +87,20 @@
             "export": "urlRewriteHandler",
             "module": "$import(@zuplo/runtime)",
             "options": {
-              "rewritePattern": "https://superjoy-joy-gateway.fly.dev/health"
+              "rewritePattern": "https://superjoy-model-gateway.fly.dev/health"
             }
           },
           "policies": {
             "inbound": [
               "api-key-inbound"
             ]
-          }
-        }
+          },
+          "label": "Joy gateway health"
+        },
+        "description": "Check that Zuplo can reach the Joy model gateway.",
+        "tags": [
+          "Operations"
+        ]
       }
     }
   }

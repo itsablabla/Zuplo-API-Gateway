@@ -18,6 +18,19 @@
         "export": "default",
         "module": "$import(./modules/forward-consumer)"
       }
+    },
+    {
+      "name": "customer-model-rate-limit",
+      "policyType": "rate-limit-inbound",
+      "handler": {
+        "export": "RateLimitInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "rateLimitBy": "user",
+          "requestsAllowed": 60,
+          "timeWindowMinutes": 1
+        }
+      }
     }
   ]
 }
